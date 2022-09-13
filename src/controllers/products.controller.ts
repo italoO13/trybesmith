@@ -9,6 +9,15 @@ export default class ProductsController {
     this.service = new ProductsService();
   }
 
+  public getAll = async (req: Request, res:Response<Product[]>, next:NextFunction) => {
+    try {
+      const result = await this.service.getAll();
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public create = async (req: Request, res:Response<Product>, next:NextFunction) => {
     try {
       const result = await this.service.create(req.body);
