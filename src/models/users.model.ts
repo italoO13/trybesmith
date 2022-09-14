@@ -8,6 +8,14 @@ export default class UsersModel {
     this.connection = connection;
   }
 
+  public async session(username: string, password: string):Promise<User[]> {
+    const QUERY = `SELECT * FROM  Trybesmith.Users WHERE 
+    username = ? AND password =?`;
+    const [result] = await this.connection
+      .execute(QUERY, [username, password]);
+    return result as User[];
+  }
+
   public async getByName(username:string, classe:string):Promise<User[]> {
     const QUERY = `SELECT * FROM Trybesmith.Users WHERE 
     username = ? AND classe =? `;
