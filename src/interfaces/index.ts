@@ -16,4 +16,5 @@ export interface User {
 export interface Order {
   id?:number, 
   userId:number,
+  productsIds?:[]
 }
