@@ -1,3 +1,6 @@
+import { JwtPayload } from 'jsonwebtoken';
+import { Request } from 'express';
+
 export interface Product {
   id?:number,
   name: string,
@@ -16,5 +19,18 @@ export interface User {
 export interface Order {
   id?:number, 
   userId:number,
-  productsIds?:[]
+  productsIds?:number[]
+}
+export interface RequestWithUserRole extends Request {
+  user?: {
+    id: number, 
+    username?:string,
+    classe?:string,
+  },
+}
+
+export interface IJWT extends JwtPayload {
+  id:number, 
+  username?:string, 
+  classe?:string,
 }
