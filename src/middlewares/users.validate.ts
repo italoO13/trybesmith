@@ -13,7 +13,7 @@ export default class UsersValidate {
     const { error } = this.schema.validate(req.body);
     if (error) {
       const [status, message] = error.message.split('|');
-      throw new CustomError(Number(status), message);
+      return next(new CustomError(Number(status), message));
     }
     next();
   };
