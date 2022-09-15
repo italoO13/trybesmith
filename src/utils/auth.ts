@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import jwt, { SignOptions, Secret } from 'jsonwebtoken';
+import { IJWT } from '../interfaces';
 
 dotenv.config();
 
@@ -24,4 +25,6 @@ export default class AuthJWT {
     );
     return token;
   };
+
+  public verifyToken = (token: string) => jwt.verify(token, this.secret) as IJWT;
 }
