@@ -7,8 +7,8 @@ import LoginRouter from './login.route';
 const router = Router();
 
 router.use('/products', ProductsRouter);
-router.use('/users', UsersRouter);
 router.use('/orders', OrdersRouter);
+router.use('/users', UsersRouter);
 router.use('/login', LoginRouter);
 
 export default router;
