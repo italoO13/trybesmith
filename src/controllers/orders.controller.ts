@@ -1,5 +1,5 @@
 import { Response, Request, NextFunction } from 'express';
-import { Order } from '../interfaces';
+import { IJWT, Order, RequestWithUserRole } from '../interfaces';
 import OrdersService from '../services/orders.service';
 
 export default class OrdersController {
@@ -13,6 +13,17 @@ export default class OrdersController {
     try {
       const result = await this.service.getAll();
       res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public create = async (req: RequestWithUserRole, res:Response, next:NextFunction) => {
+    try {
+      const { id } = req.user as IJWT;
+      const { productsIds } = req.body;
+      const result = await this.service.create(id, productsIds as number[]);
+      res.status(201).send(result);
     } catch (error) {
       next(error);
     }
